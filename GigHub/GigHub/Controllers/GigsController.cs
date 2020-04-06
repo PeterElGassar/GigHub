@@ -32,6 +32,7 @@ namespace GigHub.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.Genres = _context.Genres.ToList();
                 return View(model);
             }
 
@@ -40,7 +41,7 @@ namespace GigHub.Controllers
                 Location = model.Location,
                 ArtistId = User.Identity.GetUserId(),
                 GenreId = model.GenreId,
-                DateTime = model.DateTime
+                DateTime = model.GetDateTime()
             };
             _context.Gigs.Add(gig);
             _context.SaveChanges();
