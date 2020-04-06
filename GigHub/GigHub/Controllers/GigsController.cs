@@ -40,8 +40,7 @@ namespace GigHub.Controllers
                 Location = model.Location,
                 ArtistId = User.Identity.GetUserId(),
                 GenreId = model.GenreId,
-
-                DateTime = DateTime.Parse(String.Format("{0},{1}", model.Date, model.Time))
+                DateTime = model.DateTime
             };
             _context.Gigs.Add(gig);
             _context.SaveChanges();
