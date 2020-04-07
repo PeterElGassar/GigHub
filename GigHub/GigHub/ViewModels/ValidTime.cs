@@ -11,8 +11,7 @@ namespace GigHub.ViewModels
     {
         public override bool IsValid(object value)
         {
-            // An object that supplies culture-specific formatting information about Date
-            //CultureInfo enUS = new CultureInfo("en-US");
+            
             DateTime dateTime;
             var isValid = DateTime.TryParseExact(Convert.ToString(value),
                  "HH:mm",
@@ -20,7 +19,6 @@ namespace GigHub.ViewModels
                  DateTimeStyles.None,
                  out dateTime);
 
-            // If both Condition is true state is Valid
             return (isValid);
 
         }
