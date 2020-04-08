@@ -21,7 +21,9 @@ namespace GigHub.Controllers
         public ActionResult Create()
         {
             var GenresList = _context.Genres.ToList();
+
             GigFormViewModel model = new GigFormViewModel();
+
             model.Genres = GenresList;
             return View(model);
         }

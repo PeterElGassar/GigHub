@@ -190,6 +190,10 @@
     <Compile Include="Migrations\202004061245498_SetGenreId_ArtistIdRequired.Designer.cs">
       <DependentUpon>202004061245498_SetGenreId_ArtistIdRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004080934551_AddNamePropToApplicationUserClass.cs" />
+    <Compile Include="Migrations\202004080934551_AddNamePropToApplicationUserClass.Designer.cs">
+      <DependentUpon>202004080934551_AddNamePropToApplicationUserClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004061245498_SetGenreId_ArtistIdRequired.resx">
       <DependentUpon>202004061245498_SetGenreId_ArtistIdRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004080934551_AddNamePropToApplicationUserClass.resx">
+      <DependentUpon>202004080934551_AddNamePropToApplicationUserClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
