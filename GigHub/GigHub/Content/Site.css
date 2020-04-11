@@ -16,6 +16,7 @@ h1, h2, h3, h4, h5 {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 20px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -37,25 +38,27 @@ textarea {
     border-color: #ff5e42;
 }
 
-.navbar-inverse .navbar-nav > li > a {
+    .navbar-inverse .navbar-nav > li > a {
         color: #ffffff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #ffffff;
+    }
+
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        background-color: rgba(255,152,114,0.53);
+    }
+
+.dropdown-menu {
+    box-shadow: none;
+    -moz-box-shadow: none;
 }
 
-.navbar-inverse .navbar-brand {
-        color: #ffffff;
-}
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: rgba(255,152,114,0.53);
-}
-.dropdown-menu{
-      box-shadow: none;
-        -moz-box-shadow: none;
-}
-
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    text-decoration: none;
-    background-color: rgba(255,152,114,0.9);
-}
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+        text-decoration: none;
+        background-color: rgba(255,152,114,0.9);
+    }
 
 .navbar-inverse .navbar-nav > .dropdown > a .caret {
     border-top-color: #fff;
@@ -104,4 +107,62 @@ select.form-control {
     font-size: 1.8rem;
     padding: 7px 20px;
     border-radius: 11px;
+}
+
+.details .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    border-radius: 11px;
+}
+
+/*Gig Desgin*/
+
+ul.upcomeing-gigs-list li {
+    display: flex;
+    margin: 20px 0px;
+}
+
+ul.upcomeing-gigs-list {
+    list-style-type: none;
+    padding: 20px 15px;
+}
+
+.month {
+    text-align: center;
+    padding: 5px 3px;
+    background-color: orangered;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.date {
+    min-width: 35%;
+    margin-right: 10px;
+}
+
+.details {
+    min-width: 50%;
+    padding-top: 5px;
+}
+
+    .details > .genre {
+        font-size: 1.5rem;
+        color: #686868;
+        display: inline;
+        margin-right: 5px;
+    }
+
+    .details > .artist {
+        font-weight: bold;
+    }
+
+
+.day {
+    text-align: center;
+    padding: 5px 3px;
+    background: rgba(211, 211, 211, 0.31);
+    /*border-radius: 0px 0px 5px 5px;*/
+    /*border: 1px solid #b5b5b5;*/
+    border-top: none;
 }
