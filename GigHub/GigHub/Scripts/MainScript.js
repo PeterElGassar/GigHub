@@ -1,4 +1,6 @@
-﻿
+﻿/////////
+//Attendances  Function 
+//////
 
 $(".attend-gig-btn").on("click", function () {
     var button = $(this);
@@ -42,4 +44,70 @@ $(".followLinkBtn").on("click", function () {
 
 
 
+});
+
+/////////
+//cancel Gig Function 
+//////
+
+
+$(".deleteGigBtn").on("click", function () {
+    var link = $(this);
+    //bootbox confirm
+    //important note Don't Initializ Any Var In BootBox Scop
+    //bootbox.confirm("Are You sure You Want to Delete this Gig ?", function (result) {
+        
+
+    //});
+
+    var dialog = bootbox.dialog({
+        message: "<h2>Are You sure You Want to Delete this Gig</h2>",
+        size: 'large',
+        buttons: {
+            no: {
+                label: "No",
+                className: 'btn-default',
+                callback: function () {
+                    //close Dialog
+                    bootbox.hideAll();
+                }
+            },
+            yes: {
+                label: "Yes",
+                className: 'btn-danger',
+                callback: function () {
+                    //Use Ajax Here Because Request Is a Delete
+                    $.ajax({
+                        url: "/api/Gigs/" + link.attr("data-gig-id"),
+                        method: "DELETE",
+                    })
+                    .done(function () {
+                        link.parents("li").fadeOut("slow", function () {
+                            //then remove from Dom 
+                            //link.parents("li").remove();
+                            $(this).remove();
+                        });
+                    })
+                    .fail(function (data) {
+                        alert("SomeThing Failed")
+                    })
+                }
+            }
+           
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 });

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GigHub.Models.Gig>
+@{
+    ViewBag.Title = "MyUpcomeingGigs";
+}
+
+<h2>My Upcomeing Gigs</h2>
+
+<ul class="upcomeing-gigs-list">
+    @foreach (var gig in Model)
+    {
+        <li class="col-xs-12 col-sm-6 col-md-3 single-gig">
+            <div class="date">
+                <div class="month">@gig.DateTime.ToString("MMM")</div>
+                <div class="day">@gig.DateTime.Day</div>
+            </div>
+
+            <div class="details">
+                <p class="artist">@gig.Location</p>
+                <p class="genre">@gig.Genre.Name</p>
+                <div class="action">
+                    <a href="/gigs/Edit/@gig.Id">Edit</a> | <a href="#" class="deleteGigBtn" data-gig-id="@gig.Id">Delete</a>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+@section Scripts
+    {
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/MainScript.js"></script>
+
+}

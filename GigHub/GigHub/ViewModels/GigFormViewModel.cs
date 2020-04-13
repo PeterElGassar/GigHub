@@ -9,6 +9,9 @@ namespace GigHub.ViewModels
 {
     public class GigFormViewModel
     {
+        public int Id { get; set; }
+
+
         [Required]
         public string Location { get; set; }
         [Required]
@@ -23,6 +26,12 @@ namespace GigHub.ViewModels
         public byte GenreId { get; set; }
 
         public IEnumerable<Genre> Genres { get; set; }
+
+
+        public string Heading { get; set; }
+
+        public string Action { get; set; }
+
 
         public DateTime GetDateTime()
         {

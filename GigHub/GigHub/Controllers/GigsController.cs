@@ -18,15 +18,22 @@ namespace GigHub.Controllers
 
 
 
+
+
         [Authorize]
         public ActionResult Create()
         {
-            var GenresList = _context.Genres.ToList();
 
-            GigFormViewModel model = new GigFormViewModel();
+            GigFormViewModel model = new GigFormViewModel()
+            {
+                Heading = "Add",
+                Action = "Create",
+                Genres = _context.Genres.ToList()
+            };
 
-            model.Genres = GenresList;
-            return View(model);
+
+
+            return View("GigForm", model);
         }
 
         [Authorize]
@@ -37,7 +44,7 @@ namespace GigHub.Controllers
             if (!ModelState.IsValid)
             {
                 model.Genres = _context.Genres.ToList();
-                return View(model);
+                return View("GigForm", model);
             }
 
             var gig = new Gig()
@@ -49,8 +56,85 @@ namespace GigHub.Controllers
             };
             _context.Gigs.Add(gig);
             _context.SaveChanges();
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("MyUpcomeingGigs");
         }
+
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+
+            string currentUserId = User.Identity.GetUserId();
+
+            var gig = _context.Gigs.SingleOrDefault(g => g.Id == id && g.ArtistId == currentUserId);
+            if (gig == null)
+            {
+                return HttpNotFound();
+            }
+
+            GigFormViewModel viewModel = new GigFormViewModel()
+            {
+                Id = gig.Id,
+                Genres = _context.Genres.ToList(),
+                Location = gig.Location,
+                GenreId = gig.GenreId,
+                Date = gig.DateTime.ToString("dd/MM/yyyy"),
+                Time = gig.DateTime.ToString("HH:mm"),
+                Heading = "Update",
+                //Change it from here to Domian Model 
+                Action = "Edit",
+            };
+
+            return View("GigForm", viewModel);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(GigFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Genres = _context.Genres.ToList();
+                return View("GigForm", model);
+            }
+
+            string currentUserId = User.Identity.GetUserId();
+
+            //get gig in Database To Updated
+            var gigInDb = _context.Gigs.SingleOrDefault(g => g.Id == model.Id && g.ArtistId == currentUserId);
+
+            if (gigInDb == null)
+            {
+                return HttpNotFound();
+            }
+
+            gigInDb.Location = model.Location;
+            gigInDb.DateTime = model.GetDateTime();
+            gigInDb.GenreId = model.GenreId;
+
+
+            _context.SaveChanges();
+            return RedirectToAction("MyUpcomeingGigs");
+        }
+
+
+
+        [Authorize]
+        public ActionResult MyUpcomeingGigs()
+        {
+            string currentUserId = User.Identity.GetUserId();
+
+            var Gigslist = _context.Gigs
+                .Where(g =>
+                g.ArtistId == currentUserId &&
+                g.DateTime > DateTime.Now &&
+                g.IsCanceled == false)
+                .Include(g => g.Genre)
+                .ToList();
+
+            return View(Gigslist);
+        }
+
 
         [Authorize]
         public ActionResult Attending()
@@ -67,7 +151,7 @@ namespace GigHub.Controllers
             {
                 UpComeingGigs = gigs,
                 ShowActions = false,
-                Heading= "Gigs I'm Attending"
+                Heading = "Gigs I'm Attending"
             };
 
 
