@@ -18,11 +18,13 @@ namespace GigHub.Models
 
         public ICollection<Following> Followers { get; set; }
         public ICollection<Following> Followees { get; set; }
+        public ICollection<User_Notification> UserNotifications { get; set; }
 
         public ApplicationUser()
         {
             Followers = new Collection<Following>();
             Followees = new Collection<Following>();
+            UserNotifications = new Collection<User_Notification>();
 
         }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -32,7 +34,22 @@ namespace GigHub.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+
+
+        // This Function Add To current user argument "notification"
+        // and add it to relational collection objects "UserNotifications"
+        public void Notify(Notification notification)
+        {
+            var user_Notifiaction = new User_Notification(this, notification);
+
+            //هنا لما تضيف ال 
+            //new object to collection then in controller SaveChanges  EF will add New Record To Database
+            UserNotifications.Add(user_Notifiaction);
+        }
+
+
     }
 
-    
+
 }

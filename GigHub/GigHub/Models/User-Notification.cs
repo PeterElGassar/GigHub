@@ -29,5 +29,19 @@ namespace GigHub.Models
 
         public bool IsRead { get; set; }
 
+
+
+
+        public User_Notification()
+        {
+
+        }
+
+        public User_Notification(ApplicationUser user, Notification notification)
+        {
+            //Related Objects not ForeignKey
+            User = user;
+            Notification = notification;
+        }
     }
 }

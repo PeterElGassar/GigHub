@@ -101,19 +101,18 @@ namespace GigHub.Controllers
             string currentUserId = User.Identity.GetUserId();
 
             //get gig in Database To Updated
-            var gigInDb = _context.Gigs.SingleOrDefault(g => g.Id == model.Id && g.ArtistId == currentUserId);
+            var gigInDb = _context.Gigs.Include(g => g.Attendances.Select(a => a.Attendee))
+                .SingleOrDefault(g => g.Id == model.Id && g.ArtistId == currentUserId);
 
             if (gigInDb == null)
             {
                 return HttpNotFound();
             }
 
-            gigInDb.Location = model.Location;
-            gigInDb.DateTime = model.GetDateTime();
-            gigInDb.GenreId = model.GenreId;
-
+            gigInDb.Update(model);
 
             _context.SaveChanges();
+
             return RedirectToAction("MyUpcomeingGigs");
         }
 
