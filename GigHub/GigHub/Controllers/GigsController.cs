@@ -109,7 +109,7 @@ namespace GigHub.Controllers
                 return HttpNotFound();
             }
 
-            gigInDb.Update(model);
+            gigInDb.Update(model, gigInDb);
 
             _context.SaveChanges();
 

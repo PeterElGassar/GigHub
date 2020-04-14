@@ -44,7 +44,7 @@ namespace GigHub.Models
 
             //============= Cancel gig Notification =====
             //1 Initial notification
-            Notification notification = new Notification(NotificationType.GigCanceled, this);
+            Notification notification = Notification.GigCanceled(this);
 
 
             //3 iterate through attendeesUser
@@ -57,18 +57,14 @@ namespace GigHub.Models
         }
 
 
-        public void Update(GigFormViewModel model)
+        public void Update(GigFormViewModel model ,Gig gigInDb)
         {
 
             //1.Get All Attendanee fro this gig 
             //var attendees = _context.Attendances.Where(a => a.GigId == gigInDb.Id).Select(a => a.Attendee).ToList();
 
             //2.Intial Notification for Update Case
-            var notification = new Notification(NotificationType.GigUpdated, this);
-            notification.OldDateTime = this.DateTime;
-            notification.OldLocation = this.Location;
-
-
+            var notification = Notification.GigUpdated(this, gigInDb.DateTime, gigInDb.Location);
             //3.Send To All Attendee
             //"Attendances.Select(a => a.Attendee)" instead of Query statement  that get all Attendances stup no. '1'
             //Use Here Relationla collection object "Attendances" and Insert new object to every attendee
