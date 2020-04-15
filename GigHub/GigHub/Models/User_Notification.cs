@@ -22,26 +22,33 @@ namespace GigHub.Models
         [ForeignKey("Notification")]
         public int NotificationId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public ApplicationUser User { get; private set; }
 
-        public Notification Notification { get; set; }
+        public Notification Notification { get; private set; }
 
 
         public bool IsRead { get; set; }
 
 
 
-
-        public User_Notification()
+        //Default constructor to Entity Framwork 
+        protected User_Notification()
         {
 
         }
 
         public User_Notification(ApplicationUser user, Notification notification)
         {
+            if (user == null)
+                throw new ArgumentNullException("user");
+
+            if (notification == null)
+                throw new ArgumentNullException("notification");
+
             //Related Objects not ForeignKey
             User = user;
             Notification = notification;
+
         }
     }
 }

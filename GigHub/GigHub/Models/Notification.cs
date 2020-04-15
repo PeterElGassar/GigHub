@@ -48,14 +48,10 @@ namespace GigHub.Models
             //}
         }
 
-
-
         public static Notification GigCreate(Gig gig)
         {
             return new Notification(NotificationType.GigCreated, gig);
         }
-
-
 
         public static Notification GigUpdated(Gig newGig, DateTime oldDateTime, string oldLocation)
         {
