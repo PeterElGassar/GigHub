@@ -155,7 +155,7 @@ ul.upcomeing-gigs-list {
 
     .details > .artist {
         font-weight: bold;
-        display:block
+        display: block;
     }
 
 
@@ -169,13 +169,27 @@ ul.upcomeing-gigs-list {
 }
 
 
-.action{
-    display:none !important;
-    font-size:1.4rem
+.action {
+    display: none !important;
+    font-size: 1.4rem;
 }
 
 
-.single-gig:hover .action{
-    display:block !important;
-
+.single-gig:hover .action {
+    display: block !important;
 }
+
+/*Notification */
+
+.notification {
+    position: relative;
+}
+
+    .notification span {
+        position: absolute;
+        top: -8px;
+        left: 11px;
+        background-color: #e81e1e;
+        line-height: 17px;
+        padding-top: 0px;
+    }

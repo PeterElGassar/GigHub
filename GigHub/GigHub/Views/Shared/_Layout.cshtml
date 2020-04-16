@@ -42,5 +42,38 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/x-template" id="notification-template">
+        <ul>
+            <%
+            _.each(notifcations,function(notifcation){
+
+            if(notifcation.type == 1){%>
+            <li> <%=notifcation.gig.artist.name %> has Canceled the gig at <%=notifcation.gig.location%> at <%=notifcation.gig.dateTime%></li>
+            <%}
+
+            else if(notifcation.type == 2){
+                        var changes = [], oldValues = [], newValues = [];
+
+                        if( notifcation.oldLocation != notifcation.gig.location ){
+                            changes.push('location');
+                            oldValues.push(notifcation.oldLocation);
+                            newValues.push(notifcation.gig.location);
+                        }
+
+                        if(notifcation.oldDateTime != notifcation.gig.dateTime){
+                            changes.push('date/time');
+                            oldValues.push(notifcation.oldDateTime);
+                            newValues.push(notifcation.gig.dateTime);
+                        } 
+                         %>
+
+                    <li><%= notifcation.gig.artist.name %> has Updated the <%= changes.join(' and ') %>  of the gig from <%= oldValues.join('/')%> to <%= newValues.join('/') %></li>
+                <%
+                }
+
+            })
+            %>
+        </ul>
+    </script>
 </body>
 </html>

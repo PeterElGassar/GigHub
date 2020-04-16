@@ -56,7 +56,7 @@ $(".deleteGigBtn").on("click", function () {
     //bootbox confirm
     //important note Don't Initializ Any Var In BootBox Scop
     //bootbox.confirm("Are You sure You Want to Delete this Gig ?", function (result) {
-        
+
 
     //});
 
@@ -93,21 +93,37 @@ $(".deleteGigBtn").on("click", function () {
                     })
                 }
             }
-           
+
         }
     });
 
 
+});
 
 
+//Notification ==========
+$.getJSON("/api/Notifications", function (notifcations) {
+    //if (notifcations.length == 0) {
+    //    return false;
+    //}
+    if (notifcations.length > 0) {
+        $(".js-notification-count").text(notifcations.length)
+            .removeClass("hide")
+            .addClass("animated shake");
+        //Call popover Plugin
+        $('.notification').popover({
+
+            html: true,
+            title: "Noitifications",
+            content: function () {
+                var compiled = _.template($("#notification-template").html());
+                return compiled({ notifcations: notifcations })
 
 
+            },
+            placement: "bottom"
 
+        });
+    }
 
-
-
-
-
-
-    
 });
