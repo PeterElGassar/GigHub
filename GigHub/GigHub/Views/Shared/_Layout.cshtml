@@ -39,16 +39,17 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Lib")
     @RenderSection("scripts", required: false)
+
+    @*//type="text/x-template" to make browser Ignore script to be able to write Underscore *@
     <script type="text/x-template" id="notification-template">
-        <ul>
+        <ul class="notifications">
             <%
             _.each(notifcations,function(notifcation){
 
             if(notifcation.type == 1){%>
-            <li> <%=notifcation.gig.artist.name %> has Canceled the gig at <%=notifcation.gig.location%> at <%=notifcation.gig.dateTime%></li>
+            <li><span class="highlight"> <%=notifcation.gig.artist.name %></span> has Canceled the Gig at <%=notifcation.gig.location%> at <%=moment(notifcation.gig.dateTime).format(' Do MMM HH:mm')%></li>
             <%}
 
             else if(notifcation.type == 2){
@@ -62,12 +63,12 @@
 
                         if(notifcation.oldDateTime != notifcation.gig.dateTime){
                             changes.push('date/time');
-                            oldValues.push(notifcation.oldDateTime);
-                            newValues.push(notifcation.gig.dateTime);
+                            oldValues.push(moment(notifcation.oldDateTime).format(' Do MMM HH:mm'));
+                            newValues.push(moment(notifcation.gig.dateTime).format(' Do MMM HH:mm'));
                         } 
                          %>
 
-                    <li><%= notifcation.gig.artist.name %> has Updated the <%= changes.join(' and ') %>  of the gig from <%= oldValues.join('/')%> to <%= newValues.join('/') %></li>
+                    <li><span class="highlight"> <%=notifcation.gig.artist.name %> </span> has Updated the <%= changes.join(' and ') %>  of the Gig <strong>from</strong> <%= oldValues.join(' / ')%> <strong>to</strong> <%= newValues.join('/') %></li>
                 <%
                 }
 

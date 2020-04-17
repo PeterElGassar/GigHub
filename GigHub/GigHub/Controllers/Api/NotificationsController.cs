@@ -10,7 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace GigHub.Controllers.Api
+namespace GigHub.Controllers.Apisite
 {
     [Authorize]
     public class NotificationsController : ApiController
