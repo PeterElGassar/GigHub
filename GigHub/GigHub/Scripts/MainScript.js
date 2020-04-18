@@ -101,29 +101,37 @@ $(".deleteGigBtn").on("click", function () {
 });
 
 
-//Notification ==========
-$.getJSON("/api/Notifications", function (notifcations) {
-    //if (notifcations.length == 0) {
-    //    return false;
-    //}
-    if (notifcations.length > 0) {
-        $(".js-notification-count").text(notifcations.length)
-            .removeClass("hide")
-            .addClass("animated shake");
+//Get All New Notifications ==========
+$.getJSON("/api/Notifications/GetNewNotifications", function (date) {
+    if (date.count > 0) {
+        $(".js-notification-count").text(date.count)
+                .removeClass("hide")
+                .addClass("animated shake");
+    }
+
         //Call popover Plugin
         $('.notification').popover({
-
             html: true,
             title: "Noitifications",
             content: function () {
                 var compiled = _.template($("#notification-template").html());
-                return compiled({ notifcations: notifcations })
 
+                return compiled({ notifications: date.notifications })
 
             },
             placement: "bottom"
 
+        })
+            .on("shown.bs.popover", function () {
+
+            $.post("/api/Notifications/ReadNotifications")
+                .done(function () {
+                    //botstrap badge set it empty
+                    $(".js-notification-count")
+                        .text("")
+                        .addClass("hide");
+                });
+
         });
-    }
 
 });

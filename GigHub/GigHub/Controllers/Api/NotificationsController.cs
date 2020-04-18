@@ -22,19 +22,50 @@ namespace GigHub.Controllers.Apisite
             _context = new ApplicationDbContext();
         }
 
-        public IEnumerable<NotificationDto> GetNewNotifications()
+        [HttpGet]
+        public IHttpActionResult GetNewNotifications()
         {
             string currentUserId = User.Identity.GetUserId();
 
+            //changed to get all Notifications Not just new Notifications
             var notifications = _context.User_Notifications
-                .Where(un => un.UserId == currentUserId && !un.IsRead)
+                .Where(un => un.UserId == currentUserId)
                 .Select(un => un.Notification)
+                .OrderBy(n=> n.DateTime)
                 .Include(n => n.Gig.Artist)
                 .ToList();
 
+            //get all new Notifications 
+            var countNewNotifications = _context.User_Notifications
+                .Where(un => un.UserId == currentUserId && un.IsRead == false)
+                .Select(un => un.Notification)
+                .ToArray();
+
+            int count = countNewNotifications.Length;
 
 
-            return notifications.Select(Mapper.Map<Notification, NotificationDto>);
+
+            return Json(new { count = count, notifications = notifications.Select(Mapper.Map<Notification, NotificationDto>) });
+        }
+
+        [HttpPost]
+        public IHttpActionResult ReadNotifications()
+        {
+
+            string currentUserId = User.Identity.GetUserId();
+
+            var notificationsInDb = _context.User_Notifications
+                .Where(un => un.UserId == currentUserId && !un.IsRead)
+                .ToList();
+
+            foreach (var notifiy in notificationsInDb)
+            {
+
+                notifiy.Read();
+            }
+
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

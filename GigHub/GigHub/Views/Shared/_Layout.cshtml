@@ -46,29 +46,28 @@
     <script type="text/x-template" id="notification-template">
         <ul class="notifications">
             <%
-            _.each(notifcations,function(notifcation){
-
-            if(notifcation.type == 1){%>
-            <li><span class="highlight"> <%=notifcation.gig.artist.name %></span> has Canceled the Gig at <%=notifcation.gig.location%> at <%=moment(notifcation.gig.dateTime).format(' Do MMM HH:mm')%></li>
+            _.each(notifications,function(notifcation){
+            if(notifcation.Type == 1){%>
+            <li><span class="highlight"> <%=notifcation.Gig.Artist.Name %></span> has Canceled the Gig at <%=notifcation.Gig.Location%> at <%=moment(notifcation.Gig.DateTime).format(' Do MMM HH:mm')%></li>
             <%}
 
-            else if(notifcation.type == 2){
+            else if(notifcation.Type == 2){
                         var changes = [], oldValues = [], newValues = [];
 
-                        if( notifcation.oldLocation != notifcation.gig.location ){
+                        if( notifcation.OldLocation != notifcation.Gig.Location ){
                             changes.push('location');
-                            oldValues.push(notifcation.oldLocation);
-                            newValues.push(notifcation.gig.location);
+                            oldValues.push(notifcation.OldLocation);
+                            newValues.push(notifcation.Gig.Location);
                         }
 
-                        if(notifcation.oldDateTime != notifcation.gig.dateTime){
+                        if(notifcation.OldDateTime != notifcation.Gig.DateTime){
                             changes.push('date/time');
-                            oldValues.push(moment(notifcation.oldDateTime).format(' Do MMM HH:mm'));
-                            newValues.push(moment(notifcation.gig.dateTime).format(' Do MMM HH:mm'));
+                            oldValues.push(moment(notifcation.OldDateTime).format(' Do MMM HH:mm'));
+                            newValues.push(moment(notifcation.Gig.DateTime).format(' Do MMM HH:mm'));
                         } 
                          %>
 
-                    <li><span class="highlight"> <%=notifcation.gig.artist.name %> </span> has Updated the <%= changes.join(' and ') %>  of the Gig <strong>from</strong> <%= oldValues.join(' / ')%> <strong>to</strong> <%= newValues.join('/') %></li>
+                    <li><span class="highlight"> <%=notifcation.Gig.Artist.Name %> </span> has Updated the <%= changes.join(' and ') %>  of the Gig <strong>from</strong> <%= oldValues.join(' / ')%> <strong>to</strong> <%= newValues.join('/') %></li>
                 <%
                 }
 

@@ -18,5 +18,6 @@ namespace GigHub.Dtos
         public string OldLocation { get; set; }
 
         public GigDto Gig { get; set; }
+        public bool IsRead { get; set; }
     }
 }

@@ -1,5 +1,8 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Roboto:wght@400;500&display=swap');
-
+/*Colors-Variables*/
+@cal-color: orangered;
+@nav-bg: #ff4342;
+@nav-border: #ff4342;
 
 body {
     padding-top: 50px;
@@ -34,31 +37,41 @@ textarea {
 }
 /*Bootstrap Overrides */
 .navbar-inverse {
-    background-color: #ff4342;
-    border-color: #ff5e42;
+    background-color: @nav-bg;
+    border-color: @nav-border;
+
+    .navbar-nav > li > a {
+        color: #ffffff;
+
+        .open > a {
+            background-color: rgba(255,152,114,0.53);
+        }
+
+        .open > a:hover {
+            background-color: rgba(255,152,114,0.53);
+        }
+    }
+
+    .navbar-brand {
+        color: #ffffff;
+    }
 }
 
-    .navbar-inverse .navbar-nav > li > a {
-        color: #ffffff;
-    }
 
-    .navbar-inverse .navbar-brand {
-        color: #ffffff;
-    }
 
-    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-        background-color: rgba(255,152,114,0.53);
-    }
+.navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: rgba(255,152,114,0.53);
+}
 
 .dropdown-menu {
     box-shadow: none;
     -moz-box-shadow: none;
 }
 
-    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-        text-decoration: none;
-        background-color: rgba(255,152,114,0.9);
-    }
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    background-color: rgba(255,152,114,0.9);
+}
 
 .navbar-inverse .navbar-nav > .dropdown > a .caret {
     border-top-color: #fff;
@@ -87,11 +100,11 @@ textarea {
     border-radius: 10px;
 }
 
-    .form-control:focus {
-        border-color: #2196f3;
-        box-shadow: none;
-        -moz-box-shadow: none;
-    }
+.form-control:focus {
+    border-color: #2196f3;
+    box-shadow: none;
+    -moz-box-shadow: none;
+}
 
 select.form-control {
     height: 42px;
@@ -109,24 +122,17 @@ select.form-control {
     border-radius: 11px;
 }
 
-.details .btn {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 3px;
-    border-radius: 11px;
-}
-
 /*Gig Desgin*/
 
-ul.upcomeing-gigs-list li {
-    display: flex;
-    margin: 20px 0px;
-}
 
 ul.upcomeing-gigs-list {
     list-style-type: none;
     padding: 20px 15px;
+
+    li {
+        display: flex;
+        margin: 20px 0px;
+    }
 }
 
 .month {
@@ -144,19 +150,28 @@ ul.upcomeing-gigs-list {
 .details {
     min-width: 50%;
     padding-top: 5px;
-}
 
-    .details > .genre {
+    .genre {
         font-size: 1.5rem;
         color: #686868;
         display: inline;
         margin-right: 5px;
     }
 
-    .details > .artist {
+    .artist {
         font-weight: bold;
         display: block;
     }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+        border-radius: 11px;
+    }
+}
+
 
 
 .day {
@@ -183,9 +198,8 @@ ul.upcomeing-gigs-list {
 
 .notification {
     position: relative;
-}
 
-    .notification span {
+    span {
         position: absolute;
         top: -8px;
         left: 11px;
@@ -193,3 +207,39 @@ ul.upcomeing-gigs-list {
         line-height: 17px;
         padding-top: 0px;
     }
+}
+
+
+/*Popover========== */
+
+.popover {
+    max-width: 405px;
+
+    .popover-content {
+        overflow: auto;
+        height: 450px;
+    }
+
+
+    .popover-title {
+        text-align: center;
+    }
+
+
+    ul.notifications {
+        list-style: none;
+        padding-left: 0px;
+
+        li:not(:last-child) {
+            border-bottom: 1px solid #b6b6b6;
+        }
+
+        li {
+            padding: 10px 0px;
+        }
+
+        span.highlight {
+            font-weight: bold;
+        }
+    }
+}
