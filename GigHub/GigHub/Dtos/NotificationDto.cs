@@ -8,7 +8,6 @@ namespace GigHub.Dtos
 {
     public class NotificationDto
     {
-        public int Id { get; set; }
 
         public DateTime DateTime { get; set; }
 
@@ -20,7 +19,5 @@ namespace GigHub.Dtos
 
         public GigDto Gig { get; set; }
         public bool IsRead { get; set; }
-
-        
     }
 }

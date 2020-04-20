@@ -38,10 +38,11 @@ namespace GigHub.Controllers.Apisite
             //get all new Notifications 
             var countNewNotifications = _context.User_Notifications
                 .Where(un => un.UserId == currentUserId && un.IsRead == false)
-                .Select(un => un.Notification).ToArray();
+                .Select(un => un.Notification)
+                .ToArray();
 
             int count = countNewNotifications.Length;
-            
+
 
 
             return Json(new { count = count, notifications = notifications.Select(Mapper.Map<Notification, NotificationDto>) });
