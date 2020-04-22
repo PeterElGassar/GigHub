@@ -1,7 +1,6 @@
 ﻿/////////
-//Attendances  Function 
+//Attendances  Function (Going)
 //////
-
 $(".attend-gig-btn").on("click", function () {
     var button = $(this);
     //"GigId" is a Name Of Dto Object Of GigId
@@ -22,7 +21,6 @@ $(".attend-gig-btn").on("click", function () {
 /////////
 //Follwing Function 
 //////
-
 $(".followLinkBtn").on("click", function () {
     var button = $(this);
     var allBtns = $(".followLinkBtn");
@@ -49,8 +47,6 @@ $(".followLinkBtn").on("click", function () {
 /////////
 //cancel Gig Function 
 //////
-
-
 $(".deleteGigBtn").on("click", function () {
     var link = $(this);
     //bootbox confirm
@@ -81,16 +77,16 @@ $(".deleteGigBtn").on("click", function () {
                         url: "/api/Gigs/" + link.attr("data-gig-id"),
                         method: "DELETE",
                     })
-                    .done(function () {
-                        link.parents("li").fadeOut("slow", function () {
-                            //then remove from Dom 
-                            //link.parents("li").remove();
-                            $(this).remove();
-                        });
-                    })
-                    .fail(function (data) {
-                        alert("SomeThing Failed")
-                    })
+                        .done(function () {
+                            link.parents("li").fadeOut("slow", function () {
+                                //then remove from Dom 
+                                //link.parents("li").remove();
+                                $(this).remove();
+                            });
+                        })
+                        .fail(function (data) {
+                            alert("SomeThing Failed")
+                        })
                 }
             }
 
@@ -103,35 +99,38 @@ $(".deleteGigBtn").on("click", function () {
 
 //Get All New Notifications ==========
 $.getJSON("/api/Notifications/GetNewNotifications", function (date) {
-    if (date.count > 0) {
-        $(".js-notification-count").text(date.count)
-                .removeClass("hide")
-                .addClass("animated shake");
+    if (date.count.length > 0) {
+        $(".js-notification-count").text(date.count.length)
+            .removeClass("hide")
+            .addClass("animated shake");
     }
 
-        //Call popover Plugin
-        $('.notification').popover({
-            html: true,
-            title: "Noitifications",
-            content: function () {
-                var compiled = _.template($("#notification-template").html());
+    //Call popover Plugin
+    $('.notification').popover({
+        html: true,
+        title: "Noitifications",
+        content: function () {
+            //return Html 
+            var compiled = _.template($("#notification-template").html());
 
-                return compiled({ notifications: date.notifications })
+            return compiled({ notifications: date })
+        },
+        placement: "bottom"
 
-            },
-            placement: "bottom"
+    }).on("shown.bs.popover", function () {
 
-        })
-            .on("shown.bs.popover", function () {
+        $.post("/api/Notifications/ReadNotifications")
+            .done(function () {
+                //botstrap badge set it empty
+                $(".js-notification-count")
+                    .text("")
+                    .addClass("hide");
 
-            $.post("/api/Notifications/ReadNotifications")
-                .done(function () {
-                    //botstrap badge set it empty
-                    $(".js-notification-count")
-                        .text("")
-                        .addClass("hide");
-                });
-
-        });
+            });
+        setTimeout(function () {
+            //Remove Backgroung-color of new Notification 
+            $(".single-notify").removeClass("well");
+        }, 5000)
+    });
 
 });

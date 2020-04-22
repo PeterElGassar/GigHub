@@ -39,16 +39,16 @@ namespace GigHub.Models
 
         public User_Notification(ApplicationUser user, Notification notification)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-
-            if (notification == null)
-                throw new ArgumentNullException("notification");
 
             //Related Objects not ForeignKey
+            if (user == null)
+                   throw new ArgumentNullException("user");
+
+            //short cut to if condition if null throw Exception
+            if (notification == null)
+                throw new ArgumentNullException("notification");
             User = user;
             Notification = notification;
-
         }
 
         public void Read()

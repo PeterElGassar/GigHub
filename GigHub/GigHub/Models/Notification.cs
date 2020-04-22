@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -27,25 +28,23 @@ namespace GigHub.Models
         [ForeignKey("GigId")]
         public Gig Gig { get; set; }
 
+
+        //public ICollection<User_Notification> UserNotification { get; set; }
+        //================
+
+
         protected Notification()
         {
-
         }
 
         private Notification(NotificationType type, Gig gig)
         {
             if (gig == null)
-                throw new ArgumentNullException("gig");
+                  throw new ArgumentNullException("gig");
 
-            Gig = gig;
             Type = type;
             DateTime = DateTime.Now;
-
-            //if (type == NotificationType.GigUpdated)
-            //{
-            //    OldDateTime = gig.DateTime;
-            //    OldLocation = gig.Location;
-            //}
+            Gig = gig;
         }
 
         public static Notification GigCreate(Gig gig)

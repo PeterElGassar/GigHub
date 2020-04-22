@@ -60,24 +60,24 @@ namespace GigHub.Models
         public void Update(GigFormViewModel model ,Gig gigInDb)
         {
 
-            //1.Get All Attendanee fro this gig 
+            //1.Get All Attendanee for this gig 
             //var attendees = _context.Attendances.Where(a => a.GigId == gigInDb.Id).Select(a => a.Attendee).ToList();
 
             //2.Intial Notification for Update Case
             var notification = Notification.GigUpdated(this, gigInDb.DateTime, gigInDb.Location);
             //3.Send To All Attendee
             //"Attendances.Select(a => a.Attendee)" instead of Query statement  that get all Attendances stup no. '1'
-            //Use Here Relationla collection object "Attendances" and Insert new object to every attendee
-            foreach (var attendee in Attendances.Select(a => a.Attendee))
-            {
-                //invok Notify Function
-                attendee.Notify(notification);
-            }
+            //Use Here Relationla collection object "Attendances" and Insert new object to every attendee        
 
             this.DateTime = model.GetDateTime();
             this.Location = model.Location;
             this.GenreId = model.GenreId;
 
+            foreach (var attendee in this.Attendances.Select(a => a.Attendee))
+            {
+                //invok Notify Function
+                attendee.Notify(notification);
+            }
         }
     }
 }

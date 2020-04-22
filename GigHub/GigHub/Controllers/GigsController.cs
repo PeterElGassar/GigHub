@@ -17,21 +17,15 @@ namespace GigHub.Controllers
         }
 
 
-
-
-
         [Authorize]
         public ActionResult Create()
         {
-
             GigFormViewModel model = new GigFormViewModel()
             {
                 Heading = "Add",
                 Action = "Create",
                 Genres = _context.Genres.ToList()
             };
-
-
 
             return View("GigForm", model);
         }

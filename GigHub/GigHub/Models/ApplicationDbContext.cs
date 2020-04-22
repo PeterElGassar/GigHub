@@ -51,6 +51,12 @@ namespace GigHub.Models
                 .WithMany(u=> u.UserNotifications)
                 .WillCascadeOnDelete(false);
 
+            //Here befor specify Relatinal Object To Notification Model 
+            //modelBuilder.Entity<User_Notification>()
+            //.HasRequired(un => un.Notification)
+            //.WithMany(u => u.UserNotification);
+
+
             base.OnModelCreating(modelBuilder);
         }
 

@@ -31,21 +31,19 @@ namespace GigHub.Controllers.Apisite
             var notifications = _context.User_Notifications
                 .Where(un => un.UserId == currentUserId)
                 .Select(un => un.Notification)
-                .OrderBy(n=> n.DateTime)
+                .OrderBy(n => n.DateTime)
                 .Include(n => n.Gig.Artist)
                 .ToList();
 
             //get all new Notifications 
             var countNewNotifications = _context.User_Notifications
                 .Where(un => un.UserId == currentUserId && un.IsRead == false)
-                .Select(un => un.Notification)
+                .Select(un => un.NotificationId)
                 .ToArray();
 
-            int count = countNewNotifications.Length;
+            //int notificationCount = countNewNotifications.Length;
 
-
-
-            return Json(new { count = count, notifications = notifications.Select(Mapper.Map<Notification, NotificationDto>) });
+            return Json(new { count = countNewNotifications, notifications = notifications.Select(Mapper.Map<Notification, NotificationDto>) });
         }
 
         [HttpPost]

@@ -9,6 +9,8 @@ namespace GigHub.Dtos
     public class NotificationDto
     {
 
+        public int Id { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public NotificationType Type { get; set; }
@@ -18,6 +20,7 @@ namespace GigHub.Dtos
         public string OldLocation { get; set; }
 
         public GigDto Gig { get; set; }
+
         public bool IsRead { get; set; }
     }
 }

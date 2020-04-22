@@ -45,35 +45,54 @@
     @*//type="text/x-template" to make browser Ignore script to be able to write Underscore *@
     <script type="text/x-template" id="notification-template">
         <ul class="notifications">
-            <%
-            _.each(notifications,function(notifcation){
-            if(notifcation.Type == 1){%>
-            <li><span class="highlight"> <%=notifcation.Gig.Artist.Name %></span> has Canceled the Gig at <%=notifcation.Gig.Location%> at <%=moment(notifcation.Gig.DateTime).format(' Do MMM HH:mm')%></li>
-            <%}
+            <%_.each(notifications.notifications,function(notifcation){
+
+                    //Check if This notifcation Readed Before Or Not/////////
+                    if(notifications.count.length > 0){
+                                notifications.count.forEach(function(singleId){
+                                             if(notifcation.Id == singleId){
+                                            notifcation.IsRead = true;
+                                          }
+                                });                         
+                    }
+
+
+                if(notifcation.Type == 1){
+                    if(notifcation.IsRead){%>
+                             <li class="well single-notify"><span class="highlight"> <%=notifcation.Gig.Artist.Name %></span> has Canceled the Gig at <%=notifcation.Gig.Location%> at <%=moment(notifcation.Gig.DateTime).format(' Do MMM HH:mm')%></li>           
+                    <%}
+                      else{%>
+                               <li><span class="highlight"> <%=notifcation.Gig.Artist.Name %></span> has Canceled the Gig at <%=notifcation.Gig.Location%> at <%=moment(notifcation.Gig.DateTime).format(' Do MMM HH:mm')%></li>
+                     <%}
+                 }
 
             else if(notifcation.Type == 2){
-                        var changes = [], oldValues = [], newValues = [];
+                var changes = [], oldValues = [], newValues = [];
 
-                        if( notifcation.OldLocation != notifcation.Gig.Location ){
-                            changes.push('location');
-                            oldValues.push(notifcation.OldLocation);
-                            newValues.push(notifcation.Gig.Location);
-                        }
+                    if( notifcation.OldLocation != notifcation.Gig.Location ){
+                        changes.push('Location');
+                        oldValues.push(notifcation.OldLocation);
+                        newValues.push(notifcation.Gig.Location);
+                    }
 
-                        if(notifcation.OldDateTime != notifcation.Gig.DateTime){
+                    if(notifcation.OldDateTime != notifcation.Gig.DateTime){
                             changes.push('date/time');
                             oldValues.push(moment(notifcation.OldDateTime).format(' Do MMM HH:mm'));
                             newValues.push(moment(notifcation.Gig.DateTime).format(' Do MMM HH:mm'));
-                        } 
-                         %>
+                        }
 
-                    <li><span class="highlight"> <%=notifcation.Gig.Artist.Name %> </span> has Updated the <%= changes.join(' and ') %>  of the Gig <strong>from</strong> <%= oldValues.join(' / ')%> <strong>to</strong> <%= newValues.join('/') %></li>
-                <%
-                }
+                    if(notifcation.IsRead){%>
+                               <li class="well single-notify"><span class="highlight"> <%=notifcation.Gig.Artist.Name %> </span> has Updated the <%= changes.join(' and ') %>  of the Gig <strong>from</strong> <%= oldValues.join(' / ')%> <strong>to</strong> <%= newValues.join('/') %></li>            
+                   <%}else{%>
+                               <li class="single-notify"><span class="highlight single-notify"> <%=notifcation.Gig.Artist.Name %> </span> has Updated the <%= changes.join(' and ') %>  of the Gig <strong>from</strong> <%= oldValues.join(' / ')%> <strong>to</strong> <%= newValues.join('/') %></li>
+                     <%}
+                            
+               }
 
-            })
-            %>
+            })%>
+
         </ul>
     </script>
 </body>
 </html>
+
