@@ -4,6 +4,18 @@
 }
 
 <h2>@Model.Heading</h2>
+
+@using (Html.BeginForm("Search", "Gigs", FormMethod.Post))
+{
+    <div class="form-group search-box">
+        <div class="input-group">
+            @Html.EditorFor(m => m.SearchTerm, new { htmlAttributes = new { @class = "form-control", @placeholder = "Search artist, genre, Location" } })
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+        </div>
+    </div>
+}
+
+
 <ul class="upcomeing-gigs-list">
     @foreach (var gig in Model.UpComeingGigs)
     {
@@ -14,21 +26,26 @@
             </div>
 
             <div class="details">
-                <p class="artist">@gig.Artist.Name</p>
+                <p class="artist">
+                    <a href="@Url.Action("Details","Gigs",new { id= gig.Id })">@gig.Artist.Name</a>
+                </p>
+
                 <span>
                     <a href="#" class="followLinkBtn" data-artist-id="@gig.Artist.Id">Follow</a>
                 </span>
 
                 @if (gig.IsCanceled)
                 {
-                    <span class="label label-warning">Canceled</span>    
+                    <span class="label label-warning">Canceled</span>
                 }
-              
-                
+
                 <p class="genre">@gig.Genre.Name</p>
-                @if (Model.ShowActions)
+                @if (Model.ShowActions && !gig.IsCanceled)
                 {
-                    <button class="btn btn-default btn-sm attend-gig-btn" data-gigId="@gig.Id">Going?</button>
+                    <button
+                            class="btn @(Model.Attendances.Contains(gig.Id)? "btn-info": "btn-default") btn-sm attend-gig-btn"
+                            data-gigId="@gig.Id">Going <span class="question-mark">?</span></button>
+
                 }
             </div>
         </li>
@@ -38,6 +55,6 @@
 
 @section Scripts
     {
-    <script src="~/Scripts/MainScript.js"></script>
+    @*<script src="~/Scripts/MainScript.js"></script>*@
 
 }

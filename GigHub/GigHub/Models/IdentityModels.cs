@@ -36,7 +36,6 @@ namespace GigHub.Models
         }
 
 
-
         // This Function Add To current user argument "notification"
         // and add it to relational collection objects "UserNotifications"
         public void Notify(Notification notification)
@@ -48,6 +47,8 @@ namespace GigHub.Models
             UserNotifications.Add(user_Notifiaction);
         }
 
+
+      
 
     }
 

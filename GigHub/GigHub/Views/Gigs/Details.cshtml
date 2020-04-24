@@ -1,0 +1,41 @@
+﻿@model GigHub.ViewModels.GigDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Gig Details</h2>
+
+<div>
+    <div style="display:flex;justify-content: space-between;
+    max-width: 300px; margin:20px 0px">
+        <h3 style="margin-top: 5px;">
+            @Model.Gig.Artist.Name
+        </h3>
+
+        @if (Model.ShowActions)
+        {
+            if (Model.IsFollowing)
+            {
+                <button class="btn btn-primary btn-sm " style="height: 41px;font-size: 1.6rem;" data-gigId="">Following</button>
+            }
+            else
+            {
+                <button class="btn btn-default btn-sm " style="height: 41px;font-size: 1.6rem;" data-gigId="">Follow</button>
+            }
+        }
+
+    </div>
+    <p>
+        Preforming at
+        <strong>@Model.Gig.Location</strong> on
+        <strong>@Model.Gig.DateTime.ToString("dd MMM")</strong>
+        at
+        <strong>@Model.Gig.DateTime.ToString("HH:mm")</strong>
+    </p>
+
+    @if (Model.IsAttending &&Model.ShowActions)
+    {
+        <p>You Are Going to this Gig</p>
+    }
+</div>

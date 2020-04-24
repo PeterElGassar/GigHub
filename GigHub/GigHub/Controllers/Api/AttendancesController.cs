@@ -28,10 +28,10 @@ namespace GigHub.Controllers.Api
             //Check If Current User has Attended  This Gig Before Or Not
             if (_cotext.Attendances.Any(a => a.GigId == dto.GigId && a.AttendeeId == UserId))
                 return BadRequest("The Attendance already Exists.");
-                         
+
             var AttendUser = new Attendance
             {
-                GigId = dto.GigId ,
+                GigId = dto.GigId,
                 AttendeeId = UserId
             };
 
@@ -42,5 +42,23 @@ namespace GigHub.Controllers.Api
 
         }
 
+        [HttpDelete]
+        public IHttpActionResult DeleteAttendance(int id)
+        {
+            string UserId = User.Identity.GetUserId();
+
+            var atteandForDelete = _cotext.Attendances
+                .Where(a => a.AttendeeId == UserId && a.GigId == id)
+                .SingleOrDefault();
+
+            if (atteandForDelete == null)
+            {
+                return NotFound();
+            }
+            _cotext.Attendances.Remove(atteandForDelete);
+            _cotext.SaveChanges();
+
+            return Ok("Delete Attendance No. "+ id + " Successfully");
+        }
     }
 }

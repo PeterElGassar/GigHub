@@ -16,7 +16,6 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();
         }
 
-
         [Authorize]
         public ActionResult Create()
         {
@@ -51,6 +50,12 @@ namespace GigHub.Controllers
             _context.Gigs.Add(gig);
             _context.SaveChanges();
             return RedirectToAction("MyUpcomeingGigs");
+        }
+
+        [HttpPost]
+        public ActionResult Search(GigsViewModel viewModel)
+        {
+            return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
 
         [Authorize]
@@ -110,7 +115,28 @@ namespace GigHub.Controllers
             return RedirectToAction("MyUpcomeingGigs");
         }
 
+        public ActionResult Details(int id)
+        {
+            var gigInDb = _context.Gigs
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
+                .Single(g => g.Id == id);
 
+            if (gigInDb == null)
+                return HttpNotFound();
+
+            string currentUserId = User.Identity.GetUserId();
+
+            var viewModel = new GigDetailsViewModel()
+            {
+                Gig = gigInDb,
+                ShowActions = User.Identity.IsAuthenticated,
+                IsAttending = _context.Attendances.Any(a => a.GigId == gigInDb.Id && a.AttendeeId == currentUserId),
+
+                IsFollowing = _context.Followings.Any(f => f.FolloweeId == gigInDb.ArtistId && f.FollowerId == currentUserId)
+            };
+            return View(viewModel);
+        }
 
         [Authorize]
         public ActionResult MyUpcomeingGigs()
@@ -140,11 +166,17 @@ namespace GigHub.Controllers
                 .Include(a => a.Genre)
                 .OrderBy(a => a.DateTime)
                 .ToList();
+            var attendance = _context.Attendances
+                .Where(a => a.AttendeeId == currentUserId && a.Gig.DateTime > DateTime.Now)
+                .ToList()
+                .ToLookup(a => a.GigId);
+
             var viewModel = new GigsViewModel()
             {
                 UpComeingGigs = gigs,
                 ShowActions = false,
-                Heading = "Gigs I'm Attending"
+                Heading = "Gigs I'm Attending",
+                Attendances = attendance
             };
 
 

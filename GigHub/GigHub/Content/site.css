@@ -215,3 +215,14 @@ ul.upcomeing-gigs-list li {
 .popover ul.notifications span.highlight {
   font-weight: bold;
 }
+/*Search Form */
+.search-box {
+  width: 300px;
+}
+.search-box span {
+  border: none;
+  border-left: 1px solid #d3d1d1 !important;
+}
+.search-box input[type=text] {
+  border: none;
+}
