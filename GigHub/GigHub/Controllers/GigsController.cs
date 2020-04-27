@@ -132,7 +132,7 @@ namespace GigHub.Controllers
                 Gig = gigInDb,
                 ShowActions = User.Identity.IsAuthenticated,
                 IsAttending = _context.Attendances.Any(a => a.GigId == gigInDb.Id && a.AttendeeId == currentUserId),
-
+                Artist=gigInDb.Artist,
                 IsFollowing = _context.Followings.Any(f => f.FolloweeId == gigInDb.ArtistId && f.FollowerId == currentUserId)
             };
             return View(viewModel);
@@ -166,6 +166,7 @@ namespace GigHub.Controllers
                 .Include(a => a.Genre)
                 .OrderBy(a => a.DateTime)
                 .ToList();
+
             var attendance = _context.Attendances
                 .Where(a => a.AttendeeId == currentUserId && a.Gig.DateTime > DateTime.Now)
                 .ToList()

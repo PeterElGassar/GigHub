@@ -17,11 +17,12 @@
         {
             if (Model.IsFollowing)
             {
-                <button class="btn btn-primary btn-sm " style="height: 41px;font-size: 1.6rem;" data-gigId="">Following</button>
+                <button class="btn btn-info btn-sm btn-follow" data-artist-id="@Model.Artist.Id">Following</button>
             }
             else
             {
-                <button class="btn btn-default btn-sm " style="height: 41px;font-size: 1.6rem;" data-gigId="">Follow</button>
+                <button class="btn btn-default btn-sm btn-follow" data-artist-id="@Model.Artist.Id">Follow</button>
+
             }
         }
 

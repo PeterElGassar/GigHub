@@ -30,9 +30,9 @@
                     <a href="@Url.Action("Details","Gigs",new { id= gig.Id })">@gig.Artist.Name</a>
                 </p>
 
-                <span>
-                    <a href="#" class="followLinkBtn" data-artist-id="@gig.Artist.Id">Follow</a>
-                </span>
+                @*<span>
+                        <a href="#" class="followLinkBtn" data-artist-id="@gig.Artist.Id">Follow</a>
+                    </span>*@
 
                 @if (gig.IsCanceled)
                 {
@@ -42,9 +42,10 @@
                 <p class="genre">@gig.Genre.Name</p>
                 @if (Model.ShowActions && !gig.IsCanceled)
                 {
-                    <button
-                            class="btn @(Model.Attendances.Contains(gig.Id)? "btn-info": "btn-default") btn-sm attend-gig-btn"
-                            data-gigId="@gig.Id">Going <span class="question-mark">?</span></button>
+                    <button class="btn @(Model.Attendances.Contains(gig.Id)? "btn-info": "btn-default") btn-sm attend-gig-btn"
+                            data-gigId="@gig.Id">
+                        Going <span class="question-mark">?</span>
+                    </button>
 
                 }
             </div>
@@ -56,5 +57,6 @@
 @section Scripts
     {
     @*<script src="~/Scripts/MainScript.js"></script>*@
+
 
 }

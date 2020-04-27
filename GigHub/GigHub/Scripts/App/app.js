@@ -1,39 +1,14 @@
-﻿//IIFE function to Attendances gig (Going)
+﻿
+//Controller For Gigs 
+//IIFE function to Attendances gig (Going)
+//invok Controller Functionsss 
+GigsController.initGigs();
+
+GigDetailsController.init();
+
+
+// function to handel "?" in gogin btn
 (function () {
-    $(".attend-gig-btn").on("click", function () {
-        var button = $(this);
-        //"GigId" is a Name Of Dto Object Of GigId
-        //Any Different Name it will not make Binding between them
-        if (button.hasClass("btn-default")) {
-            $.post("/api/Attendances", { GigId: button.attr("data-gigId") })
-                .done(function () {
-                    button
-                        .removeClass("btn-default")
-                        .addClass("btn-info")
-                        .text("Going");
-                })
-                .fail(function () {
-                    alert("Your already Attended this gig..")
-                });
-
-        } else {
-            $.ajax({
-                url: "/api/Attendances/" + button.attr("data-gigId"),
-                method: "DELETE"
-            }).done(function () {
-                button
-                    .removeClass("btn-info")
-                    .addClass("btn-default")
-                    .text("Going?")
-            }).fail(function () {
-                alert("Something Wrong Happen")
-            })
-        }
-    });
-})();
-
-(function () {
-
     var btnsGoing = document.querySelectorAll(".details button");
     if (btnsGoing !== null || btnsGoing === undefined) {
 
@@ -45,31 +20,7 @@
     }
 })();
 
-(function () {
-    /////////
-    //Follwing Function 
-    //////
-    $(".followLinkBtn").on("click", function () {
-        var button = $(this);
-        var allBtns = $(".followLinkBtn");
-        $.post("/api/Followers", { FolloweeId: button.attr("data-artist-id") })
-            .done(function (date) {
-                debugger;
-                for (var i = 0; i < allBtns.length; i++) {
-                    debugger;
-                    var linkAttr = allBtns[i].getAttribute("data-artist-id")
-                    if (linkAttr === date.ArtistId) {
-                        $(allBtns[i]).text("Following");
-                    }
-                }
 
-                console.log(date.ArtistId)
-            }).fail(function () {
-                alert("Your already Following This Artist..");
-            })
-    });
-
-})();
 
 
 
@@ -125,7 +76,6 @@
     });
 
 })();
-
 
 (function () {
     //Get All New Notifications ==========

@@ -282,6 +282,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\Controllers\GigDetailsController.js" />
+    <Content Include="Scripts\App\Controllers\GigsController.js" />
+    <Content Include="Scripts\App\Services\AttendanceService.js" />
+    <Content Include="Scripts\App\Services\FollowingServices.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

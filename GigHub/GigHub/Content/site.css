@@ -226,3 +226,8 @@ ul.upcomeing-gigs-list li {
 .search-box input[type=text] {
   border: none;
 }
+
+.btn-follow {
+    height: 41px;
+    font-size: 1.6rem;
+}

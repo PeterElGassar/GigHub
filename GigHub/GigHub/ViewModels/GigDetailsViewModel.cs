@@ -10,7 +10,7 @@ namespace GigHub.ViewModels
     {
 
         public Gig Gig { get; set; }
-
+        public ApplicationUser Artist { get; set; }
         public bool ShowActions { get; set; }
 
         public bool IsFollowing { get; set; }
