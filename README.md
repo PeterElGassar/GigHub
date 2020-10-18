@@ -8,7 +8,7 @@
             <h3>Authentication system</h3>
         </li>
         <li>
-            <h3>Can Follow your Favorite Artists and get their new partise</h3>
+            <h3>Can Follow your Favorite Artists and get their new parties</h3>
         </li>
         <li>
             <h3>Can Follow/Unfollow Artists</h3>
