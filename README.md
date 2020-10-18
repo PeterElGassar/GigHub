@@ -28,6 +28,9 @@
             <h4>Asp.net Mvc</h4>
         </li>
         <li>
+            <h4>Repository Pattern Unit of work</h4>
+        </li>
+        <li>
             <h4>Entity Framework (code first approach)</h4>
         </li>
         <li>
