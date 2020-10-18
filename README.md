@@ -22,27 +22,27 @@
         </li>
     </ul>
 <hr>
- <h3>Languages/Frameworks are used to build this Application</h3>
+ <h2>Languages/Frameworks are used to build this Application</h2>
     <ul>
         <li>
-            <h4>Asp.net Mvc</h4>
+            <h3>Asp.net Mvc</h3>
         </li>
         <li>
-            <h4>Repository Pattern Unit of work</h4>
+            <h3>Repository Pattern Unit of work</h3>
         </li>
         <li>
-            <h4>Entity Framework (code first approach)</h4>
+            <h3>Entity Framework (code first approach)</h3>
         </li>
         <li>
-            <h4>jQeury By (Revealing Module Pattern)</h4>
+            <h3>jQeury By (Revealing Module Pattern)</h3>
         </li>
         <li>
-            <h4>Bootstrap v4 </h4>
+            <h3>Bootstrap v4 </h3>
         </li>
         <li>
-            <h4>Popper.js</h4>
+            <h3>Popper.js</h3>
         </li>
         <li>
-            <h4>Underscore.js ...etc</h4>
+            <h3>Underscore.js ...etc</h3>
         </li>
     </ul>
