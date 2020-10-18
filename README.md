@@ -20,3 +20,25 @@
             <h3>Gonig List To Your Upcoming Gigs</h3>
         </li>
     </ul>
+<hr>
+ <h3>Languages/Frameworks are used to build this Application</h3>
+    <ul>
+        <li>
+            <h4>Asp.net Mvc</h4>
+        </li>
+        <li>
+            <h4>Entity Framework (code first approach)</h4>
+        </li>
+        <li>
+            <h4>jQeury By (Revealing Module Pattern)</h4>
+        </li>
+        <li>
+            <h4>Bootstrap v4 </h4>
+        </li>
+        <li>
+            <h4>Popper.js</h4>
+        </li>
+        <li>
+            <h4>Underscore.js ...etc</h4>
+        </li>
+    </ul>
