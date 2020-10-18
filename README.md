@@ -1,5 +1,5 @@
 # GigHub
-<h2>Social Network for musicians and bands to ads there gigs</h2>
+<h2>Social Network for musicians and bands to ads their gigs</h2>
    <ul>
         <li>
             <h3>Crud opriation</h3>
