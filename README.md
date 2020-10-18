@@ -1,6 +1,6 @@
 # GigHub
 Social Network for musicians and bands to ads there gigs
-     <ul>
+   <ul>
         <li>
             <h3>Crud opriation</h3>
         </li>
@@ -10,7 +10,6 @@ Social Network for musicians and bands to ads there gigs
         <li>
             <h3>Can Follow your Favorite Artists and get their new partise</h3>
         </li>
-        
         <li>
             <h3>Can Follow/Unfollow Artists</h3>
         </li>
